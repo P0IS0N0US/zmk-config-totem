@@ -1,0 +1,112 @@
+# keymap-drawer config for the TOTEM cheat sheet.
+# Usage (from the repo root):
+#   pipx install keymap-drawer
+#   keymap -c keymap-drawer/config.yaml parse -z config/totem.keymap -o keymap-drawer/totem.yaml
+#   keymap -c keymap-drawer/config.yaml draw keymap-drawer/totem.yaml -j keymap-drawer/totem_layout.json -o keymap-drawer/totem.svg
+# On Windows set PYTHONUTF8=1 first (labels contain ▽ ← ä ...).
+# Note: a zmk_keycode_map here REPLACES keymap-drawer's default map, so all symbols are listed.
+
+parse_config:
+  # Strip the zmk-locale-generator prefix, then label what's left.
+  zmk_remove_keycode_prefix: ["DE_"]
+  trans_legend: { t: "▽", type: trans }
+  sticky_label: "sticky"
+  toggle_label: "toggle"
+  zmk_keycode_map:
+    EXCL: "!"
+    DQT: '"'
+    HASH: "#"
+    DLLR: "$"
+    PRCNT: "%"
+    AMPS: "&"
+    FSLH: "/"
+    LPAR: "("
+    RPAR: ")"
+    EQUAL: "="
+    LT: "<"
+    GT: ">"
+    PLUS: "+"
+    STAR: "*"
+    BSLH: "\\"
+    PIPE: "|"
+    LBRC: "{"
+    RBRC: "}"
+    LBKT: "["
+    RBKT: "]"
+    AT: "@"
+    A_UMLAUT: "ä"
+    O_UMLAUT: "ö"
+    U_UMLAUT: "ü"
+    SZ: "ß"
+    EURO: "€"
+    N0: "0"
+    N1: "1"
+    N2: "2"
+    N3: "3"
+    N4: "4"
+    N5: "5"
+    N6: "6"
+    N7: "7"
+    N8: "8"
+    N9: "9"
+    CARET: "^"
+    GRAVE: "`"
+    TILDE: "~"
+    LCTRL: "Ctrl"
+    LSHFT: "Shift"
+    LALT: "Alt"
+    LGUI: "GUI"
+    RCTRL: "RCtrl"
+    SPACE: "␣"
+    BSPC: "⌫"
+    ENTER: "⏎"
+    ESC: "Esc"
+    TAB: "Tab"
+    DEL: "Del"
+    INS: "Ins"
+    HOME: "Home"
+    END: "End"
+    PG_UP: "PgUp"
+    PG_DN: "PgDn"
+    UP: "↑"
+    DOWN: "↓"
+    LEFT: "←"
+    RIGHT: "→"
+    C_PREV: "⏮"
+    C_NEXT: "⏭"
+    C_PP: "⏯"
+    C_VOL_DN: "Vol-"
+    C_VOL_UP: "Vol+"
+    C_MUTE: "Mute"
+    # Base layer shift pairs from German Windows
+    DOT: { t: ".", s: ":" }
+    MINUS: { t: "-", s: "_" }
+    COMMA: { t: ",", s: ";" }
+  raw_binding_map:
+    "&apos_qmark": { t: "'", s: "?" }
+    "&swapper": "Swapper"
+    "&caps_word": "CapsW"
+    "&kp LC(DE_Z)": "Undo"
+    "&kp LC(DE_Y)": "Redo"
+    "&kp LC(DE_X)": "Cut"
+    "&kp LC(DE_C)": "Copy"
+    "&kp LC(DE_V)": "Paste"
+    "&kp Z": { t: "y", h: "pos" }   # Game: German Y position
+    "&kp Y": { t: "z", h: "pos" }   # GameNum: German Z position
+    "&tog 3": "Game"
+    "&to 0": "Game off"
+    "&bootloader": "Boot"
+    "&sys_reset": "Reset"
+    "&bt BT_CLR": "BT clr"
+    "&bt BT_SEL 0": "BT 0"
+    "&bt BT_SEL 1": "BT 1"
+    "&bt BT_SEL 2": "BT 2"
+    "&out OUT_TOG": "USB/BT"
+    "&none": ""
+
+draw_config:
+  key_w: 60
+  key_h: 56
+  split_gap: 40
+  combo_w: 28
+  combo_h: 26

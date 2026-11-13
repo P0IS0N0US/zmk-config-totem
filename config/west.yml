@@ -1,11 +1,19 @@
+# ZMK and zmk-tri-state pinned to matching releases (v0.3).
+# When upgrading, bump both together (tri-state tags follow ZMK releases),
+# and also the workflow ref in .github/workflows/build.yml.
 manifest:
+  defaults:
+    revision: v0.3
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: urob
+      url-base: https://github.com/urob
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: main
       import: app/west.yml
+    - name: zmk-tri-state   # Swapper (Alt-Tab) on the Nav layer
+      remote: urob
   self:
     path: config

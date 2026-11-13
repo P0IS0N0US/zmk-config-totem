@@ -1,6 +1,23 @@
+# TOTEM with a keyless dongle. ZMK v0.3 (Zephyr 3.5) -> board is seeeduino_xiao_ble.
+# Three firmwares + settings_reset. Flash settings_reset to all three first.
+---
 include:
+  # Dongle = central. Plug into the computer via USB. Runs the keymap.
+  - board: seeeduino_xiao_ble
+    shield: totem_dongle
+    artifact-name: totem_dongle
+
+  # Halves = peripherals of the dongle.
+  # Remove the cmake-args (and settings_reset everything) to go back to "left = central".
   - board: seeeduino_xiao_ble
     shield: totem_left
+    cmake-args: -DCONFIG_ZMK_SPLIT=y -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
+    artifact-name: totem_left_peripheral
   - board: seeeduino_xiao_ble
     shield: totem_right
-# there is no settingsreset (needed) for the XIAO
+    cmake-args: -DCONFIG_ZMK_SPLIT=y -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
+    artifact-name: totem_right_peripheral
+
+  # Clears bonds/settings. Flash to dongle, left and right before the new firmware.
+  - board: seeeduino_xiao_ble
+    shield: settings_reset
