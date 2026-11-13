@@ -1,0 +1,29 @@
+# Redraws the keymap cheat sheet (keymap-drawer/totem.svg + totem.yaml) and
+# commits it back to the branch. Separate from the firmware build.
+# Commits made by this workflow don't trigger other workflows, so there's no loop.
+# After it runs, `git pull` before your next push.
+name: Draw keymap
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "config/*.keymap"
+      - "keymap-drawer/config.yaml"
+      - "keymap-drawer/totem_layout.json"
+
+permissions:
+  contents: write # needed to commit the drawing
+
+jobs:
+  draw:
+    uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@v0.23.0
+    with:
+      install_version: "0.23.0"                 # same version as the workflow ref
+      keymap_patterns: "config/totem.keymap"
+      config_path: "keymap-drawer/config.yaml"
+      output_folder: "keymap-drawer"
+      # Our own 38-key physical layout (keymap-drawer has no built-in TOTEM)
+      draw_args: "totem:'-j keymap-drawer/totem_layout.json'"
+      commit_message: "keymap-drawer render"
+      fail_on_error: true

@@ -79,15 +79,18 @@
         };
 
         // Swapper = Alt-Tab (urob/zmk-tri-state).
-        // First press: Alt down + Tab. Further presses: Tab. Any other key or a
-        // layer activation ends it (Alt up).
+        // First press: Alt down + Tab. Further presses: Tab. Any other key,
+        // a layer activation, or RELEASING NAV ends it (Alt up = switch window).
         // Ignored (don't end it): 36 right-thumb Shift, 12 Nav Shift,
-        // 7/16/17/18 arrows, 33 Nav thumb (its release would end it otherwise).
+        // 7/16/17/18 arrows.
+        // The Nav thumb (33) must NOT be ignored: tri-state matches positions
+        // only, not layers, so after Nav is released 12/16/17/18/7 are the Base
+        // letters T/H/A/E/O and would be sent as Alt+letter.
         swapper: swapper {
             compatible = "zmk,behavior-tri-state";
             #binding-cells = <0>;
             bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
-            ignored-key-positions = <36 12 7 16 17 18 33>;
+            ignored-key-positions = <36 12 7 16 17 18>;
             ignored-layers = <NAV>;
         };
     };
